@@ -65,7 +65,7 @@ def main():
 
     tcp_servers = []
     udp_servers = []
-    dns_resolver = asyncdns.DNSResolver()
+    dns_resolver = asyncdns.DNSResolver(config['black_hostname_list'])
     if int(config['workers']) > 1:
         stat_counter_dict = None
     else:
@@ -106,7 +106,7 @@ def main():
         if 'server_ipv6' in a_config:
             try:
                 if len(a_config['server_ipv6']) > 2 and a_config['server_ipv6'][
-                        0] == "[" and a_config['server_ipv6'][-1] == "]":
+                        0] == b"[" and a_config['server_ipv6'][-1] == b"]":
                     a_config['server_ipv6'] = a_config['server_ipv6'][1:-1]
                 a_config['server_port'] = int(port)
                 a_config['password'] = password

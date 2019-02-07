@@ -304,6 +304,9 @@ def get_config(is_local):
             config['server'] = to_str(config['server'])
     else:
         config['server'] = to_str(config.get('server', '0.0.0.0'))
+        config['black_hostname_list'] = to_str(config.get('black_hostname_list', '')).split(',')
+        if len(config['black_hostname_list']) == 1 and config['black_hostname_list'][0] == '':
+            config['black_hostname_list'] = []
         try:
             config['ignore_bind'] = \
                 IPNetwork(config.get('ignore_bind', '127.0.0.0/8,::1/128,10.0.0.0/8,192.168.0.0/16'))
